@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const START_VALUE = 0.5;
@@ -10,7 +10,7 @@ const useNativeDriver = true;
 /**
  * Create a repetitive fadein / fadeout animation
  */
-const Fade = ({ children }) => {
+const Fade = ({ children, style }) => {
   const animation = new Animated.Value(START_VALUE);
 
   function start() {
@@ -33,16 +33,18 @@ const Fade = ({ children }) => {
   }
 
   start();
-  const style = { opacity: animation };
-  return <Animated.View style={style}>{children}</Animated.View>;
+  const opacityAnimation = { opacity: animation };
+  return <Animated.View style={[opacityAnimation, style]}>{children}</Animated.View>;
 };
 
 Fade.propTypes = {
   children: PropTypes.shape({}),
+  style: View.propTypes.style,
 };
 
 Fade.defaultProps = {
   children: null,
+  style: {},
 };
 
 export default Fade;

@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Animations from './animation/animations';
 
 const renderAnimation = (Animation, Component, props) => {
+  const { animationWrapperStyle, ...restProps } = props;
   if (!Animation) {
     throw new Error(`${Animation.name} doesnt exist in the current project`);
   }
   return (
-    <Animation>
-      <Component {...props} />
+    <Animation style={animationWrapperStyle}>
+      <Component {...restProps} />
     </Animation>
   );
 };
